@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Factory {
+  id                   String        @id @default(uuid())
+  name                 String        @unique
+  timeZone             String
+  allocatablePersonnel Personnel[]   @relation("AllowedFactoryPersonnel")
+  Reservation          Reservation[]
+}
+
+model Personnel {
+  id                     String        @id @default(uuid())
+  personalId             String        @unique
+  fullName               String
+  email                  String        @unique
+  allocatableToFactories Factory[]     @relation("AllowedFactoryPersonnel")
+  reservations           Reservation[] @relation("PersonnelReservation")
+}
+
+model Reservation {
+  id                 String      @id @default(uuid())
+  startTime          DateTime
+  endTime            DateTime
+  allocatedPersonnel Personnel[] @relation("PersonnelReservation")
+  factoryId          String
+  factory            Factory     @relation(fields: [factoryId], references: [id])
+}

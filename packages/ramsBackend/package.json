@@ -3,13 +3,20 @@
 	"scripts": {
 		"dev": "tsx watch --inspect src/server.ts",
 		"localDB:up": "docker compose -f docker-compose.local.yml up",
-		"localDB:down": "docker compose -f docker-compose.local.yml down"
+		"localDB:down": "docker compose -f docker-compose.local.yml down",
+		"localDB:seed": "tsx --env-file=.env prisma/seeds/pgSeed.ts",
+		"prisma:deploy-migration": "dotenv -e .env -- npx prisma migrate deploy",
+		"prisma:generate-client": "dotenv -e .env -- npx prisma generate",
+		"localDB:reset": "pnpm localDB:down && pnpm localDB:up -d && pnpm prisma:deploy-migration && pnpm localDB:seed && pnpm prisma:generate-client"
 	},
 	"dependencies": {
-		"prisma": "^6.18.0",
+		"@prisma/client": "^6.18.0",
 		"typescript": "~5.9.3"
 	},
 	"devDependencies": {
+		"@types/node": "^24.9.2",
+		"dotenv-cli": "^7.4.2",
+		"prisma": "^6.18.0",
 		"tsx": "^4.20.6"
 	}
 }
