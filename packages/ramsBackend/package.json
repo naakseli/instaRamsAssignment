@@ -7,7 +7,7 @@
 		"localDB:seed": "tsx --env-file=.env prisma/seeds/pgSeed.ts",
 		"prisma:deploy-migration": "dotenv -e .env -- npx prisma migrate deploy",
 		"prisma:generate-client": "dotenv -e .env -- npx prisma generate",
-		"localDB:reset": "pnpm localDB:down && pnpm localDB:up -d && pnpm prisma:deploy-migration && pnpm localDB:seed && pnpm prisma:generate-client"
+		"localDB:reset": "pnpm localDB:down && pnpm localDB:up -d && pnpm prisma:deploy-migration && pnpm prisma:generate-client && pnpm localDB:seed"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.18.0",
