@@ -1,11 +1,12 @@
 {
 	"name": "ramsBackend",
-	"version": "1.0.0",
-	"main": "index.js",
 	"scripts": {
-		"dev": "tsx watch --inspect src/server.ts"
+		"dev": "tsx watch --inspect src/server.ts",
+		"localDB:up": "docker compose -f docker-compose.local.yml up",
+		"localDB:down": "docker compose -f docker-compose.local.yml down"
 	},
 	"dependencies": {
+		"prisma": "^6.18.0",
 		"typescript": "~5.9.3"
 	},
 	"devDependencies": {
