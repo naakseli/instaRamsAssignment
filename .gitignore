@@ -109,3 +109,6 @@ dist
 .DS_Store
 
 .yarn
+
+# Prisma generated files
+**/prisma/generated/
