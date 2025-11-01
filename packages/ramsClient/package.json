@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@insta/ramsbackend": "workspace:*",
+		"@insta/shared": "workspace:*",
 		"@mantine/core": "^8.3.6",
 		"@mantine/dates": "^8.3.6",
 		"@mantine/form": "^8.3.6",

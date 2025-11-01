@@ -1,10 +1,10 @@
+import { PersonnelCreateBody, PersonnelDTO, PersonnelUpdateBody } from '@insta/shared'
 import { FastifyPluginAsync } from 'fastify'
 import { prisma } from '../../prisma/prisma'
-import type { PersonnelCreateBody, PersonnelResponse, PersonnelUpdateBody } from '../types/api.type'
 
 const personnelRouter: FastifyPluginAsync = async fastify => {
 	// GET all personnel
-	fastify.get<{ Reply: PersonnelResponse[] }>('/', async (request, reply) => {
+	fastify.get<{ Reply: PersonnelDTO[] }>('/', async (request, reply) => {
 		const personnel = await prisma.personnel.findMany()
 		return reply.send(personnel)
 	})

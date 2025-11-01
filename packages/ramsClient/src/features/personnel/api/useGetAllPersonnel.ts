@@ -1,11 +1,9 @@
-import { PersonnelResponse } from '@insta/ramsbackend/src/types/api.type'
+import { PersonnelDTO } from '@insta/shared'
 import { useQuery } from '@tanstack/react-query'
 import { apiClient } from '../../../api/apiClient'
 
-export type Personnel = PersonnelResponse
-
-export async function getPersonnel(): Promise<Personnel[]> {
-	const { data } = await apiClient.get<Personnel[]>(`/personnel`)
+export async function getPersonnel(): Promise<PersonnelDTO[]> {
+	const { data } = await apiClient.get<PersonnelDTO[]>(`/personnel`)
 	return data
 }
 

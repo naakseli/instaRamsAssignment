@@ -1,5 +1,4 @@
-import { FactoryResponse } from '@insta/ramsbackend/src/types/api.type'
-import { isValidIANATimezone } from '@insta/ramsbackend/src/utils/validation'
+import { FactoryDTO, isValidIANATimezone } from '@insta/shared'
 import { Button, Modal, Stack, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
@@ -8,7 +7,7 @@ import { useUpdateFactory } from '../api/useUpdateFactory'
 interface EditFactoryModalProps {
 	opened: boolean
 	onClose: () => void
-	factory: FactoryResponse | null
+	factory: FactoryDTO | null
 }
 
 export function EditFactoryModal({ opened, onClose, factory }: EditFactoryModalProps) {

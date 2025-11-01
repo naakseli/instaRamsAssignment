@@ -1,19 +1,20 @@
+import { PersonnelDTO } from '@insta/shared'
 import { ActionIcon, Center, Container, Loader, Menu, Table, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconDots } from '@tabler/icons-react'
 import { useState } from 'react'
-import { Personnel, useGetAllPersonnel } from '../api/useGetAllPersonnel'
+import { useGetAllPersonnel } from '../api/useGetAllPersonnel'
 import { EditPersonnelModal } from '../components/EditPersonnelModal'
 
 const PersonnelPage = () => {
 	const { data: allPersonnel, isLoading } = useGetAllPersonnel()
-	const [editingPersonnel, setEditingPersonnel] = useState<Personnel | null>(null)
+	const [editingPersonnel, setEditingPersonnel] = useState<PersonnelDTO | null>(null)
 	const [
 		editPersonnelModalOpened,
 		{ open: openEditPersonnelModal, close: closeEditPersonnelModal },
 	] = useDisclosure(false)
 
-	const handleEditPersonnel = (person: Personnel) => {
+	const handleEditPersonnel = (person: PersonnelDTO) => {
 		setEditingPersonnel(person)
 		openEditPersonnelModal()
 	}

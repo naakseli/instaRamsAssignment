@@ -1,4 +1,4 @@
-import { PersonnelResponse } from '@insta/ramsbackend/src/types/api.type'
+import { PersonnelDTO } from '@insta/shared'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { apiClient } from '../../../api/apiClient'
 
@@ -12,8 +12,8 @@ export async function updatePersonnel({
 	personalId?: string
 	fullName?: string
 	email?: string
-}): Promise<PersonnelResponse> {
-	const { data } = await apiClient.put<PersonnelResponse>(`/personnel/${id}`, {
+}): Promise<PersonnelDTO> {
+	const { data } = await apiClient.put<PersonnelDTO>(`/personnel/${id}`, {
 		personalId,
 		fullName,
 		email,

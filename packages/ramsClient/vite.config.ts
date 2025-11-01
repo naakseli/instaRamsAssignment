@@ -7,7 +7,7 @@ export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: {
-			'@insta/ramsbackend': path.resolve(__dirname, '../ramsBackend'),
+			'@insta/shared': path.resolve(__dirname, '../shared/src/index.ts'),
 		},
 	},
 })

@@ -1,4 +1,4 @@
-import { FactoryResponse } from '@insta/ramsbackend/src/types/api.type'
+import { FactoryDTO } from '@insta/shared'
 import { ActionIcon, Center, Container, Loader, Menu, Table, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconDots } from '@tabler/icons-react'
@@ -10,9 +10,9 @@ const FactoriesPage = () => {
 	const { data: factories, isLoading } = useFactories()
 	const [editFactoryModalOpened, { open: openEditFactoryModal, close: closeEditFactoryModal }] =
 		useDisclosure(false)
-	const [editingFactory, setEditingFactory] = useState<FactoryResponse | null>(null)
+	const [editingFactory, setEditingFactory] = useState<FactoryDTO | null>(null)
 
-	const handleEditFactory = (factory: FactoryResponse) => {
+	const handleEditFactory = (factory: FactoryDTO) => {
 		setEditingFactory(factory)
 		openEditFactoryModal()
 	}

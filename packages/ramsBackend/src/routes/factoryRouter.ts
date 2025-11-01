@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
 import { prisma } from '../../prisma/prisma'
-import { isValidIANATimezone } from '../utils/validation'
+import { isValidIANATimezone } from '../../../shared/src/utils/timezoneValidation'
 
 const factoriesRouter: FastifyPluginAsync = async fastify => {
 	// GET all factories
