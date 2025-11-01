@@ -1,14 +1,19 @@
-// Require the framework and instantiate it
-
-// ESM
+import cors from '@fastify/cors'
 import Fastify from 'fastify'
+import factoriesRouter from './routers/factoryRouter.js'
 import personnelRouter from './routers/personnelRouter.js'
 
 const fastify = Fastify({
 	logger: true,
 })
 
+fastify.register(cors, {
+	origin: true, // Allow all origins in development
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Add PUT and other methods you might need
+})
+
 fastify.register(personnelRouter, { prefix: '/personnel' })
+fastify.register(factoriesRouter, { prefix: '/factories' })
 
 fastify.listen({ port: 3000 }, function (err, address) {
 	if (err) {

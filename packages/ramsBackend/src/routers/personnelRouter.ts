@@ -1,5 +1,6 @@
-import { FastifyPluginAsync, FastifyReply } from 'fastify'
+import { FastifyPluginAsync } from 'fastify'
 import { PrismaClient } from '../../prisma/generated/prisma/client'
+import type { PersonnelCreateBody, PersonnelResponse, PersonnelUpdateBody } from '../types/api.type'
 
 const prisma = new PrismaClient()
 
@@ -8,39 +9,9 @@ const allRelations = {
 	reservations: true,
 }
 
-interface PersonnelCreateBody {
-	personalId: string
-	fullName: string
-	email: string
-}
-
-interface PersonnelUpdateBody {
-	personalId?: string
-	fullName?: string
-	email?: string
-}
-
-interface PrismaError extends Error {
-	code?: string
-	meta?: { target?: string[] }
-}
-
-const handlePrismaError = (error: PrismaError, reply: FastifyReply) => {
-	if (error.code === 'P2025') {
-		return reply.status(404).send({ error: 'Personnel not found' })
-	}
-
-	if (error.code === 'P2002') {
-		const field = error.meta?.target?.[0]
-		return reply.status(409).send({ error: `${field || 'Field'} must be unique` })
-	}
-
-	return reply.status(500).send({ error: 'Internal server error' })
-}
-
 const personnelRouter: FastifyPluginAsync = async fastify => {
 	// GET all personnel
-	fastify.get('/', async (request, reply) => {
+	fastify.get<{ Reply: PersonnelResponse[] }>('/', async (request, reply) => {
 		const personnel = await prisma.personnel.findMany({
 			include: allRelations,
 		})
@@ -71,17 +42,12 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 			})
 		}
 
-		try {
-			const personnel = await prisma.personnel.create({
-				data: { personalId, fullName, email },
-				include: allRelations,
-			})
+		const personnel = await prisma.personnel.create({
+			data: { personalId, fullName, email },
+			include: allRelations,
+		})
 
-			return reply.status(201).send(personnel)
-		} catch (error) {
-			fastify.log.error(error)
-			return handlePrismaError(error as PrismaError, reply)
-		}
+		return reply.status(201).send(personnel)
 	})
 
 	// PUT update personnel
@@ -89,18 +55,13 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 		Params: { id: string }
 		Body: PersonnelUpdateBody
 	}>('/:id', async (request, reply) => {
-		try {
-			const personnel = await prisma.personnel.update({
-				where: { id: request.params.id },
-				data: request.body,
-				include: allRelations,
-			})
+		const personnel = await prisma.personnel.update({
+			where: { id: request.params.id },
+			data: request.body,
+			include: allRelations,
+		})
 
-			return reply.send(personnel)
-		} catch (error) {
-			fastify.log.error(error)
-			return handlePrismaError(error as PrismaError, reply)
-		}
+		return reply.send(personnel)
 	})
 
 	// PUT /personnel/:id/factories
@@ -110,17 +71,12 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 			const { id } = request.params
 			const { factoryIds } = request.body
 
-			try {
-				const personnel = await prisma.personnel.update({
-					where: { id },
-					data: { allocatableToFactories: { connect: factoryIds.map(id => ({ id })) } },
-					include: allRelations,
-				})
-				return reply.send(personnel)
-			} catch (error) {
-				fastify.log.error(error)
-				return handlePrismaError(error as PrismaError, reply)
-			}
+			const personnel = await prisma.personnel.update({
+				where: { id },
+				data: { allocatableToFactories: { connect: factoryIds.map(id => ({ id })) } },
+				include: allRelations,
+			})
+			return reply.send(personnel)
 		}
 	)
 }

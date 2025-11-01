@@ -1,7 +1,7 @@
 {
-	"name": "ramsBackend",
+	"name": "@insta/ramsbackend",
 	"scripts": {
-		"dev": "tsx watch --inspect src/server.ts",
+		"dev": "tsx watch --env-file=.env --inspect src/server.ts",
 		"localDB:up": "docker compose -f docker-compose.local.yml up",
 		"localDB:down": "docker compose -f docker-compose.local.yml down",
 		"localDB:seed": "tsx --env-file=.env prisma/seeds/pgSeed.ts",
@@ -10,6 +10,7 @@
 		"localDB:reset": "pnpm localDB:down && pnpm localDB:up -d && pnpm prisma:deploy-migration && pnpm prisma:generate-client && pnpm localDB:seed"
 	},
 	"dependencies": {
+		"@fastify/cors": "^11.1.0",
 		"@prisma/client": "^6.18.0",
 		"fastify": "^5.6.1",
 		"typescript": "~5.9.3"

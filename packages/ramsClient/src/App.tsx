@@ -1,5 +1,6 @@
 import { AppShell } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { Outlet } from 'react-router'
 import { NavBar } from './components/NavBar/NavBar'
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
 				<NavBar />
 			</AppShell.Navbar>
 
-			<AppShell.Main>Main</AppShell.Main>
+			<AppShell.Main>
+				<Outlet />
+			</AppShell.Main>
 		</AppShell>
 	)
 }

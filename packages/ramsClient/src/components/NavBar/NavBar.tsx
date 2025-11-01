@@ -4,34 +4,34 @@ import {
 	IconCalendarStats,
 	IconUser,
 } from '@tabler/icons-react'
-import { useState } from 'react'
-import classes from './NavBar.module.css'
+import { NavLink, useLocation } from 'react-router'
+import classes from './NavBar.module.scss'
 
 const data = [
-	{ link: '', label: 'Factories', icon: IconBuildingFactory2 },
-	{ link: '', label: 'Personnel', icon: IconUser },
-	{ link: '', label: 'Reservations', icon: IconCalendarEvent },
-	{ link: '', label: 'Scheduling Overview', icon: IconCalendarStats },
+	{ link: '/factories', label: 'Factories', icon: IconBuildingFactory2 },
+	{ link: '/personnel', label: 'Personnel', icon: IconUser },
+	{ link: '/reservations', label: 'Reservations', icon: IconCalendarEvent },
+	{ link: '/scheduling-overview', label: 'Scheduling Overview', icon: IconCalendarStats },
 ]
 
 export function NavBar() {
-	const [active, setActive] = useState('Billing')
+	const location = useLocation()
 
-	const links = data.map(item => (
-		<a
-			className={classes.link}
-			data-active={item.label === active || undefined}
-			href={item.link}
-			key={item.label}
-			onClick={event => {
-				event.preventDefault()
-				setActive(item.label)
-			}}
-		>
-			<item.icon className={classes.linkIcon} stroke={1.5} />
-			<span>{item.label}</span>
-		</a>
-	))
+	const links = data.map(item => {
+		const isActive =
+			location.pathname === item.link || location.pathname.startsWith(item.link + '/')
+		return (
+			<NavLink
+				className={classes.link}
+				to={item.link}
+				key={item.label}
+				data-active={isActive ? true : undefined}
+			>
+				<item.icon className={classes.linkIcon} stroke={1.5} />
+				<span>{item.label}</span>
+			</NavLink>
+		)
+	})
 
 	return (
 		<nav className={classes.navbar}>

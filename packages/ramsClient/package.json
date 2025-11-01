@@ -1,5 +1,5 @@
 {
-	"name": "ramsclient",
+	"name": "@insta/ramsclient",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -9,14 +9,18 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
+		"@insta/ramsbackend": "workspace:*",
 		"@mantine/core": "^8.3.6",
 		"@mantine/dates": "^8.3.6",
 		"@mantine/form": "^8.3.6",
 		"@mantine/hooks": "^8.3.6",
 		"@tabler/icons-react": "^3.35.0",
+		"@tanstack/react-query": "^5.90.5",
+		"axios": "^1.13.1",
 		"dayjs": "^1.11.19",
 		"react": "^19.1.1",
-		"react-dom": "^19.1.1"
+		"react-dom": "^19.1.1",
+		"react-router": "^7.9.5"
 	},
 	"devDependencies": {
 		"@types/node": "^24.6.0",
@@ -26,6 +30,7 @@
 		"postcss": "^8.5.6",
 		"postcss-preset-mantine": "^1.18.0",
 		"postcss-simple-vars": "^7.0.1",
+		"sass-embedded": "^1.93.3",
 		"typescript": "~5.9.3",
 		"vite": "^7.1.7"
 	}

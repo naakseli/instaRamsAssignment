@@ -3,11 +3,54 @@ import { PrismaClient } from '../generated/prisma/client'
 export const prisma = new PrismaClient()
 
 const main = async () => {
-	await prisma.factory.create({
-		data: {
-			name: 'Factory 1',
-			timeZone: 'UTC',
-		},
+	await prisma.factory.createMany({
+		data: [
+			{
+				name: 'Kuminauha & Kärrynpyörät Oy',
+				timeZone: 'Europe/Helsinki',
+			},
+			{
+				name: 'Pulun Tehdas',
+				timeZone: 'America/New_York',
+			},
+			{
+				name: 'Sukkahousun Sukkamarkkina',
+				timeZone: 'Asia/Tokyo',
+			},
+			{
+				name: 'Tuppisuinen Tupakka',
+				timeZone: 'Australia/Sydney',
+			},
+			{
+				name: 'Koodarin Kooditehdas',
+				timeZone: 'Europe/London',
+			},
+		],
+	})
+
+	await prisma.personnel.createMany({
+		data: [
+			{
+				personalId: '1234567890',
+				fullName: 'John Doe',
+				email: 'john.doe@example.com',
+			},
+			{
+				personalId: '1234567891',
+				fullName: 'Jane Doe',
+				email: 'jane.doe@example.com',
+			},
+			{
+				personalId: '1234567892',
+				fullName: 'Jim Doe',
+				email: 'jim.doe@example.com',
+			},
+			{
+				personalId: '1234567893',
+				fullName: 'Jill Doe',
+				email: 'jill.doe@example.com',
+			},
+		],
 	})
 }
 
