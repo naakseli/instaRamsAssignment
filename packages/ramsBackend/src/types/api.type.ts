@@ -1,8 +1,6 @@
 // Use Prisma utility types internally to derive API response types
 // based on what your queries actually return
 
-import { Prisma } from '../../prisma/generated/prisma/client'
-
 // Derive API response types from Prisma query results
 // This ensures type safety while keeping Prisma types internal
 
@@ -14,16 +12,12 @@ export type FactoryResponse = {
 }
 
 // Personnel API response (from personnelRouter with allRelations)
-export type PersonnelResponse = Prisma.PersonnelGetPayload<{
-	include: {
-		allocatableToFactories: {
-			select: { id: true; name: true }
-		}
-		reservations: {
-			select: { id: true }
-		}
-	}
-}>
+export type PersonnelResponse = {
+	id: string
+	personalId: string
+	fullName: string
+	email: string
+}
 
 // API request/body types
 export type FactoryUpdateBody = {

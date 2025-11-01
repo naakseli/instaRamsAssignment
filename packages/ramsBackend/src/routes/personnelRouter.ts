@@ -2,17 +2,10 @@ import { FastifyPluginAsync } from 'fastify'
 import { prisma } from '../../prisma/prisma'
 import type { PersonnelCreateBody, PersonnelResponse, PersonnelUpdateBody } from '../types/api.type'
 
-const allRelations = {
-	allocatableToFactories: true,
-	reservations: true,
-}
-
 const personnelRouter: FastifyPluginAsync = async fastify => {
 	// GET all personnel
 	fastify.get<{ Reply: PersonnelResponse[] }>('/', async (request, reply) => {
-		const personnel = await prisma.personnel.findMany({
-			include: allRelations,
-		})
+		const personnel = await prisma.personnel.findMany()
 		return reply.send(personnel)
 	})
 
@@ -20,7 +13,6 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 	fastify.get<{ Params: { id: string } }>('/:id', async (request, reply) => {
 		const personnel = await prisma.personnel.findUnique({
 			where: { id: request.params.id },
-			include: allRelations,
 		})
 
 		if (!personnel) {
@@ -42,7 +34,6 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 
 		const personnel = await prisma.personnel.create({
 			data: { personalId, fullName, email },
-			include: allRelations,
 		})
 
 		return reply.status(201).send(personnel)
@@ -56,7 +47,6 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 		const personnel = await prisma.personnel.update({
 			where: { id: request.params.id },
 			data: request.body,
-			include: allRelations,
 		})
 
 		return reply.send(personnel)
@@ -72,7 +62,6 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 			const personnel = await prisma.personnel.update({
 				where: { id },
 				data: { allocatableToFactories: { connect: factoryIds.map(id => ({ id })) } },
-				include: allRelations,
 			})
 			return reply.send(personnel)
 		}

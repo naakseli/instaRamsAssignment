@@ -37,7 +37,6 @@ const PersonnelPage = () => {
 						<Table.Th>Personal ID</Table.Th>
 						<Table.Th>Full Name</Table.Th>
 						<Table.Th>Email</Table.Th>
-						<Table.Th>Reservations</Table.Th>
 						<Table.Th></Table.Th>
 					</Table.Tr>
 				</Table.Thead>
@@ -55,11 +54,6 @@ const PersonnelPage = () => {
 								<Table.Td>
 									<Text size='sm' c='dimmed'>
 										{person.email}
-									</Text>
-								</Table.Td>
-								<Table.Td>
-									<Text size='sm' c='dimmed'>
-										{person.reservations?.length || 0}
 									</Text>
 								</Table.Td>
 								<Table.Td>
