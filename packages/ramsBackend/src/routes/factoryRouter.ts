@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
-import { prisma } from '../../prisma/prisma'
 import { isValidIANATimezone } from '../../../shared/src/utils/timezoneValidation'
+import { prisma } from '../../prisma/prisma'
 
 const factoriesRouter: FastifyPluginAsync = async fastify => {
 	// GET all factories
@@ -50,6 +50,15 @@ const factoriesRouter: FastifyPluginAsync = async fastify => {
 			return reply.send(factory)
 		}
 	)
+
+	// DELETE factory
+	fastify.delete<{ Params: { id: string } }>('/:id', async (request, reply) => {
+		const { id } = request.params
+		const factory = await prisma.factory.delete({
+			where: { id },
+		})
+		return reply.send(factory)
+	})
 }
 
 export default factoriesRouter

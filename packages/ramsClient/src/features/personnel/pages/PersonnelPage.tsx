@@ -1,13 +1,16 @@
 import { PersonnelDTO } from '@insta/shared'
 import { ActionIcon, Center, Container, Loader, Menu, Table, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
+import { modals } from '@mantine/modals'
 import { IconDots } from '@tabler/icons-react'
 import { useState } from 'react'
+import { useDeletePersonnel } from '../api/useDeletePersonnel'
 import { useGetAllPersonnel } from '../api/useGetAllPersonnel'
 import { EditPersonnelModal } from '../components/EditPersonnelModal'
 
 const PersonnelPage = () => {
 	const { data: allPersonnel, isLoading } = useGetAllPersonnel()
+	const { mutate: deletePersonnel } = useDeletePersonnel()
 	const [editingPersonnel, setEditingPersonnel] = useState<PersonnelDTO | null>(null)
 	const [
 		editPersonnelModalOpened,
@@ -17,6 +20,21 @@ const PersonnelPage = () => {
 	const handleEditPersonnel = (person: PersonnelDTO) => {
 		setEditingPersonnel(person)
 		openEditPersonnelModal()
+	}
+
+	const handleDeletePersonnel = (person: PersonnelDTO) => {
+		modals.openConfirmModal({
+			title: 'Delete Personnel',
+			children: (
+				<Text>
+					Are you sure you want to delete personnel: {person.fullName}? This action cannot be
+					undone.
+				</Text>
+			),
+			confirmProps: { color: 'red' },
+			onConfirm: () => deletePersonnel(person.id),
+			labels: { confirm: 'Delete', cancel: 'Cancel' },
+		})
 	}
 
 	if (isLoading) {
@@ -66,6 +84,7 @@ const PersonnelPage = () => {
 										</Menu.Target>
 										<Menu.Dropdown>
 											<Menu.Item onClick={() => handleEditPersonnel(person)}>Edit</Menu.Item>
+											<Menu.Item onClick={() => handleDeletePersonnel(person)}>Delete</Menu.Item>
 										</Menu.Dropdown>
 									</Menu>
 								</Table.Td>

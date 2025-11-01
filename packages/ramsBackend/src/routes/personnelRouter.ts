@@ -52,7 +52,7 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 		return reply.send(personnel)
 	})
 
-	// PUT /personnel/:id/factories
+	// PUT assign factories to personnel
 	fastify.put<{ Params: { id: string }; Body: { factoryIds: string[] } }>(
 		'/:id/factories',
 		async (request, reply) => {
@@ -66,6 +66,16 @@ const personnelRouter: FastifyPluginAsync = async fastify => {
 			return reply.send(personnel)
 		}
 	)
+
+	// Delete personnel
+	fastify.delete<{ Params: { id: string } }>('/:id', async (request, reply) => {
+		const { id } = request.params
+		const personnel = await prisma.personnel.delete({
+			where: { id },
+		})
+
+		return reply.send(personnel)
+	})
 }
 
 export default personnelRouter

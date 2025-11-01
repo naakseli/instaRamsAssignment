@@ -42,6 +42,9 @@ importers:
 
   packages/ramsClient:
     dependencies:
+      '@insta/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@mantine/core':
         specifier: ^8.3.6
         version: 8.3.6(@mantine/hooks@8.3.6(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -54,6 +57,9 @@ importers:
       '@mantine/hooks':
         specifier: ^8.3.6
         version: 8.3.6(react@19.2.0)
+      '@mantine/modals':
+        specifier: ^8.3.6
+        version: 8.3.6(@mantine/core@8.3.6(@mantine/hooks@8.3.6(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.6(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@tabler/icons-react':
         specifier: ^3.35.0
         version: 3.35.0(react@19.2.0)
@@ -106,6 +112,8 @@ importers:
       vite:
         specifier: ^7.1.7
         version: 7.1.12(@types/node@24.9.2)(jiti@2.6.1)(sass-embedded@1.93.3)(sass@1.93.3)(sugarss@5.0.1(postcss@8.5.6))(tsx@4.20.6)
+
+  packages/shared: {}
 
 packages:
 
@@ -438,6 +446,14 @@ packages:
     resolution: {integrity: sha512-liHfaWXHAkLjJy+Bkr29UsCwAoDQ/a64WrM67lksx8F0qqyjR5RQH8zVlhuOjdpQnwtlUkE/YiTvbJiPcoI0bw==}
     peerDependencies:
       react: ^18.x || ^19.x
+
+  '@mantine/modals@8.3.6':
+    resolution: {integrity: sha512-pQFt32LigGSQAas/Wo6VqrE77HmbTRx8POSDh/r3PfPmoQdQpBN/C8mP2Z88JixIULq47DE49YEbgLG2Dyh1zA==}
+    peerDependencies:
+      '@mantine/core': 8.3.6
+      '@mantine/hooks': 8.3.6
+      react: ^18.x || ^19.x
+      react-dom: ^18.x || ^19.x
 
   '@parcel/watcher-android-arm64@2.5.1':
     resolution: {integrity: sha512-KF8+j9nNbUN8vzOFDpRMsaKBHZ/mcjEjMToVMJOhTozkDonQFFrRcfdLWn6yWKCmJKmdVxSgHiYvTCef4/qcBA==}
@@ -1955,6 +1971,13 @@ snapshots:
   '@mantine/hooks@8.3.6(react@19.2.0)':
     dependencies:
       react: 19.2.0
+
+  '@mantine/modals@8.3.6(@mantine/core@8.3.6(@mantine/hooks@8.3.6(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@mantine/hooks@8.3.6(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    dependencies:
+      '@mantine/core': 8.3.6(@mantine/hooks@8.3.6(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@mantine/hooks': 8.3.6(react@19.2.0)
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   '@parcel/watcher-android-arm64@2.5.1':
     optional: true

@@ -10,15 +10,15 @@ const main = async () => {
 				timeZone: 'Europe/Helsinki',
 			},
 			{
-				name: 'Pulun Tehdas',
+				name: 'Pulutehdas',
 				timeZone: 'America/New_York',
 			},
 			{
-				name: 'Sukkahousun Sukkamarkkina',
+				name: 'Sukkahousun sukkamarkkina yhdistys',
 				timeZone: 'Asia/Tokyo',
 			},
 			{
-				name: 'Tuppisuinen Tupakka',
+				name: 'Tuppisuinen Tupakka Ab Oy',
 				timeZone: 'Australia/Sydney',
 			},
 			{
