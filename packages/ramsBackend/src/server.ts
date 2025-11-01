@@ -9,7 +9,7 @@ const fastify = Fastify({
 
 fastify.register(cors, {
 	origin: true, // Allow all origins in development
-	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Add PUT and other methods you might need
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
 })
 
 fastify.register(personnelRouter, { prefix: '/personnel' })
