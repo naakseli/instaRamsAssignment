@@ -1,13 +1,6 @@
-import type { PersonnelResponse } from '@insta/ramsbackend/src/types/api.type'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { apiClient } from './apiClient'
-
-export type Personnel = PersonnelResponse
-
-export async function getPersonnel(): Promise<Personnel[]> {
-	const { data } = await apiClient.get<Personnel[]>(`/personnel`)
-	return data
-}
+import { PersonnelResponse } from '@insta/ramsbackend/src/types/api.type'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { apiClient } from '../../../api/apiClient'
 
 export async function updatePersonnel({
 	id,
@@ -19,20 +12,13 @@ export async function updatePersonnel({
 	personalId?: string
 	fullName?: string
 	email?: string
-}): Promise<Personnel> {
-	const { data } = await apiClient.put<Personnel>(`/personnel/${id}`, {
+}): Promise<PersonnelResponse> {
+	const { data } = await apiClient.put<PersonnelResponse>(`/personnel/${id}`, {
 		personalId,
 		fullName,
 		email,
 	})
 	return data
-}
-
-export function usePersonnel() {
-	return useQuery({
-		queryKey: ['all-personnel'],
-		queryFn: getPersonnel,
-	})
 }
 
 export function useUpdatePersonnel() {

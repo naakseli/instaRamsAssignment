@@ -1,12 +1,13 @@
+import { PersonnelResponse } from '@insta/ramsbackend/src/types/api.type'
 import { Button, Modal, Stack, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
-import { useUpdatePersonnel, type Personnel } from '../../api/personnel'
+import { useUpdatePersonnel } from '../api/useUpdatePersonnel'
 
 interface EditPersonnelModalProps {
 	opened: boolean
 	onClose: () => void
-	personnel: Personnel | null
+	personnel: PersonnelResponse | null
 }
 
 export function EditPersonnelModal({ opened, onClose, personnel }: EditPersonnelModalProps) {

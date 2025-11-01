@@ -3,8 +3,8 @@ import { ActionIcon, Center, Container, Loader, Menu, Table, Text, Title } from 
 import { useDisclosure } from '@mantine/hooks'
 import { IconDots } from '@tabler/icons-react'
 import { useState } from 'react'
-import { useFactories } from '../api/factory/useGetAllFactories'
-import { EditFactoryModal } from '../components/EditFactoryModal/EditFactoryModal'
+import { useFactories } from '../api/useGetAllFactories'
+import { EditFactoryModal } from '../components/EditFactoryModal'
 
 const FactoriesPage = () => {
 	const { data: factories, isLoading } = useFactories()

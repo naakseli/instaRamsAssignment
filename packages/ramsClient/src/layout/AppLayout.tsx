@@ -1,9 +1,9 @@
 import { AppShell } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Outlet } from 'react-router'
-import { NavBar } from './components/NavBar/NavBar'
+import { NavBar } from './NavBar/NavBar'
 
-function App() {
+function AppLayout() {
 	const [opened, { toggle }] = useDisclosure(false)
 
 	return (
@@ -26,4 +26,4 @@ function App() {
 	)
 }
 
-export default App
+export default AppLayout

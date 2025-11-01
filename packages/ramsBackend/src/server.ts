@@ -1,7 +1,7 @@
 import cors from '@fastify/cors'
 import Fastify from 'fastify'
-import factoriesRouter from './routers/factoryRouter.js'
-import personnelRouter from './routers/personnelRouter.js'
+import factoriesRouter from './routes/factoryRouter.js'
+import personnelRouter from './routes/personnelRouter.js'
 
 const fastify = Fastify({
 	logger: true,

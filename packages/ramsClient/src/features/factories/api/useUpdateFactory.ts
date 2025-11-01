@@ -1,6 +1,6 @@
 import { FactoryResponse } from '@insta/ramsbackend/src/types/api.type'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { apiClient } from '../apiClient'
+import { apiClient } from '../../../api/apiClient'
 
 export async function updateFactory({
 	id,

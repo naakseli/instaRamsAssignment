@@ -2,16 +2,16 @@ import { ActionIcon, Center, Container, Loader, Menu, Table, Text, Title } from 
 import { useDisclosure } from '@mantine/hooks'
 import { IconDots } from '@tabler/icons-react'
 import { useState } from 'react'
-import { Personnel, usePersonnel } from '../api/personnel'
-import { EditPersonnelModal } from '../components/EditPersonnelModal/EditPersonnelModal'
+import { Personnel, useGetAllPersonnel } from '../api/useGetAllPersonnel'
+import { EditPersonnelModal } from '../components/EditPersonnelModal'
 
 const PersonnelPage = () => {
-	const { data: personnel, isLoading } = usePersonnel()
+	const { data: allPersonnel, isLoading } = useGetAllPersonnel()
+	const [editingPersonnel, setEditingPersonnel] = useState<Personnel | null>(null)
 	const [
 		editPersonnelModalOpened,
 		{ open: openEditPersonnelModal, close: closeEditPersonnelModal },
 	] = useDisclosure(false)
-	const [editingPersonnel, setEditingPersonnel] = useState<Personnel | null>(null)
 
 	const handleEditPersonnel = (person: Personnel) => {
 		setEditingPersonnel(person)
@@ -42,7 +42,7 @@ const PersonnelPage = () => {
 					</Table.Tr>
 				</Table.Thead>
 				<Table.Tbody>
-					{personnel
+					{allPersonnel
 						?.sort((a, b) => a.fullName.localeCompare(b.fullName))
 						.map(person => (
 							<Table.Tr key={person.id}>

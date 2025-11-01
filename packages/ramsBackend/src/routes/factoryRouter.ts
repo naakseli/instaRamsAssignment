@@ -29,8 +29,6 @@ const factoriesRouter: FastifyPluginAsync = async fastify => {
 			const { id } = request.params
 			const { name, timeZone } = request.body
 
-			console.log(name, timeZone, id)
-
 			if (!name || !timeZone) {
 				return reply.status(400).send({ error: 'Missing required fields: name, timeZone' })
 			}

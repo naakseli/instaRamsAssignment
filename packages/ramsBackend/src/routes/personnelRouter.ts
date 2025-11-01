@@ -1,8 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
-import { PrismaClient } from '../../prisma/generated/prisma/client'
+import { prisma } from '../../prisma/prisma'
 import type { PersonnelCreateBody, PersonnelResponse, PersonnelUpdateBody } from '../types/api.type'
-
-const prisma = new PrismaClient()
 
 const allRelations = {
 	allocatableToFactories: true,

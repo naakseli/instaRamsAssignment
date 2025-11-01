@@ -3,7 +3,7 @@ import { isValidIANATimezone } from '@insta/ramsbackend/src/utils/validation'
 import { Button, Modal, Stack, TextInput } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useEffect } from 'react'
-import { useUpdateFactory } from '../../api/factory/useUpdateFactory'
+import { useUpdateFactory } from '../api/useUpdateFactory'
 
 interface EditFactoryModalProps {
 	opened: boolean
